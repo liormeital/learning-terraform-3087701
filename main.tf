@@ -56,6 +56,7 @@ resource "aws_security_group_rule" "all_out" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
+  vpc_security_group_ids = [aws_security_group.WebAppSG.id]
 
   tags = {
     Name = "HelloWorld"
