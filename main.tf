@@ -26,7 +26,7 @@ module "WebApp_sg" {
   vpc_id         = data.aws_vpc.default.id
 
   ingress_rules  =  ["https-443-tcp","http-80-tcp"]
-  egress_rules   =  [""all-all""]
+  egress_rules   =  ["all-all"]
   }
 
 resource "aws_instance" "web" {
