@@ -20,6 +20,7 @@ data "aws_vpc" "default" {
 
 module "WebApp_sg" {
   source = "terraform-aws-modules/security-group/aws"
+  version = "4.13.0"
 
   name           = "WebApp_sg"
   description    = "Security group for WebApp_sg"
@@ -34,7 +35,7 @@ module "WebApp_sg" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
-  vpc_security_group_ids = [module.WebAppSG.security_group_id]
+  vpc_security_group_ids = [module.WebApp_sg.security_group_id]
 
   tags = {
     Name = "HelloWorld"
