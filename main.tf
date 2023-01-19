@@ -26,13 +26,15 @@ module "WebApp_sg" {
   vpc_id         = data.aws_vpc.default.id
 
   ingress_rules  =  ["https-443-tcp","http-80-tcp"]
+  ingress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules   =  ["all-all"]
+  egress_cidr_blocks = ["0.0.0.0/0"]
   }
 
 resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
-  vpc_security_group_ids = [module.WebAppSG.id]
+  vpc_security_group_ids = [module.WebAppSG.security_group_id]
 
   tags = {
     Name = "HelloWorld"
